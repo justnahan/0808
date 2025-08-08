@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { Product, generateRefLink } from '@/lib/supabase'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
+import { EnhancedButton } from '@/components/ui/enhanced-button'
+import { Card, CardContent } from '@/components/ui/enhanced-card'
 import { Badge } from '@/components/ui/badge'
 import { Star, Sparkles } from 'lucide-react'
 
@@ -58,7 +58,7 @@ export function ProductGrid() {
   return (
     <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
       {products.map((product) => (
-        <Card key={product.id} className="group hover-lift bg-card/50 border-border backdrop-blur-sm overflow-hidden">
+        <Card key={product.id} variant="product" interactive className="group overflow-hidden">
           <div className="relative">
             {product.image_url ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -108,9 +108,10 @@ export function ProductGrid() {
             </div>
             
             <div className="flex gap-3">
-              <Button
+              <EnhancedButton
                 asChild
-                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground breathing-glow"
+                variant="mystic"
+                className="flex-1 particle-burst"
               >
                 <a
                   href={generateRefLink(product, process.env.NEXT_PUBLIC_REF_CODE || 'DEFAULT')}
@@ -120,11 +121,11 @@ export function ProductGrid() {
                   <Sparkles className="w-4 h-4 mr-2" />
                   立即購買
                 </a>
-              </Button>
+              </EnhancedButton>
               
-              <Button variant="outline" size="icon" className="border-primary/30 hover:bg-primary/10">
+              <EnhancedButton variant="outline" size="icon" className="border-primary/30 hover:bg-primary/10 golden-border">
                 <Star className="w-4 h-4" />
-              </Button>
+              </EnhancedButton>
             </div>
           </CardContent>
         </Card>
