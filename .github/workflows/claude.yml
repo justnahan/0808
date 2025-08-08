@@ -1,0 +1,69 @@
+name: Claude Code Assistant
+
+on:
+  issue_comment:
+    types: [created]
+  issues:
+    types: [opened]
+
+jobs:
+  claude-assist:
+    # 只在提到 @claude 時觸發
+    if: contains(github.event.comment.body || github.event.issue.body, '@claude')
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Run Claude Code Action
+        uses: anthropics/claude-code-action@beta
+        env:
+          # Supabase environment variables
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          REF_CODE: ${{ secrets.REF_CODE }}
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ github.token }}
+          timeout_minutes: "60"
+          # 明確允許的工具
+          allowed_tools: "Bash(git:*),Bash(npm:*),Bash(pnpm:*),Bash(yarn:*),Bash(node:*),Read,Write,Edit,Glob,Grep,TodoWrite"
+          
+          # 自定義指令
+          custom_instructions: |
+            你是一位資深的前端工程師，專門協助實現創意網頁設計。
+            
+            重要規則：
+            1. 首先閱讀 CLAUDE.md 文件，了解你的角色和職責
+            2. 仔細閱讀 PRD.md 文件，理解用戶的設計需求
+            3. 查看 /docs 目錄下的所有規範文件
+            4. 使用 Next.js 15+ 和 TypeScript 實現功能
+            5. 優先使用已安裝的 shadcn/ui 元件
+            6. 通過 /api/products 獲取商品數據
+            7. 遵循所有編碼規範和視覺指南
+            
+            商品資料整合：
+            - 商品資料來自 Supabase 資料庫，不是本地 JSON 檔案
+            - 從 selected-products.json 檔案讀取要展示的商品 ID
+            - 檔案中的 productIds 陣列包含所有要展示的商品 ID（如 PROD_001、PROD_002）
+            - 優先使用 Server Component 直接從 Supabase 獲取資料
+            - 如需使用 API，使用相對路徑 /api/products?ids=PROD_001,PROD_002
+            - 不要使用 localhost 或複雜的 baseUrl 邏輯
+            - 所有購買按鈕必須使用 generateRefLink 函數生成包含 ref 參數的連結
+            - 環境變數 REF_CODE 會自動提供，用於生成推薦連結
+            
+            程式碼品質要求：
+            - 在完成任何功能實作後，必須執行 `pnpm lint` 檢查程式碼風格
+            - 必須執行 `pnpm build` 確保專案能正常構建
+            - 如果發現 lint 或 build 錯誤，必須修復後才能提交
+            - 優先修復錯誤(errors)，警告(warnings)可以暫時保留
+            
+            你的目標是將 PRD.md 中的創意描述轉化為實際可運行的網頁。
+            
+            重要：商品選擇在 selected-products.json 中，不是在 PRD.md 中。
