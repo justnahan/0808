@@ -1,103 +1,179 @@
-import Image from "next/image";
+import { Suspense } from 'react'
+import { Navigation } from '@/components/navigation'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Sparkles, Star, Moon, Heart } from 'lucide-react'
+import Link from 'next/link'
+import { ProductGrid } from '@/components/product-grid'
 
-export default function Home() {
+export const metadata = {
+  title: '星語集 - 神秘占卜與幸運物電商',
+  description: '結合占卜體驗與購物的神秘電商平台，提供星座、塔羅、水晶等靈性商品，讓您在占卜過程中發現專屬的幸運物',
+}
+
+export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen particle-bg">
+      <Navigation />
+      
+      {/* Hero Section */}
+      <section className="relative pt-24 pb-16 overflow-hidden">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-4xl mx-auto">
+            <Badge className="mb-4 bg-secondary/20 text-secondary border-secondary/30">
+              <Sparkles className="w-3 h-3 mr-1" />
+              神秘占卜與購物的完美結合
+            </Badge>
+            
+            <h1 className="font-heading text-5xl md:text-7xl text-primary mb-6 tracking-wider">
+              星語集
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
+              在占卜的神秘旅程中，發現專屬於您的<br />
+              <span className="text-accent font-accent italic">幸運物與心靈寶藏</span>
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button asChild size="lg" className="breathing-glow">
+                <Link href="/divination">
+                  <Moon className="w-5 h-5 mr-2" />
+                  立即占卜
+                </Link>
+              </Button>
+              
+              <Button variant="outline" size="lg" className="hover-lift">
+                <Link href="/products">
+                  <Star className="w-5 h-5 mr-2" />
+                  探索商品
+                </Link>
+              </Button>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* Today's Fortune Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="font-heading text-3xl text-center text-primary mb-12">
+            今日運勢指引
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <Card className="hover-lift bg-card/50 border-border backdrop-blur-sm">
+              <CardContent className="p-6 text-center">
+                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                  <Star className="w-6 h-6 text-primary-foreground" />
+                </div>
+                <h3 className="font-accent text-lg mb-2 text-primary">塔羅占卜</h3>
+                <p className="text-muted-foreground text-sm">探索當下的心境與未來的可能</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="hover-lift bg-card/50 border-border backdrop-blur-sm">
+              <CardContent className="p-6 text-center">
+                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-secondary to-accent flex items-center justify-center">
+                  <Moon className="w-6 h-6 text-secondary-foreground" />
+                </div>
+                <h3 className="font-accent text-lg mb-2 text-primary">星盤解析</h3>
+                <p className="text-muted-foreground text-sm">深度解讀您的星座密碼與天賦</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="hover-lift bg-card/50 border-border backdrop-blur-sm">
+              <CardContent className="p-6 text-center">
+                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center">
+                  <Heart className="w-6 h-6 text-accent-foreground" />
+                </div>
+                <h3 className="font-accent text-lg mb-2 text-primary">AI推薦</h3>
+                <p className="text-muted-foreground text-sm">智能匹配最適合您的幸運物</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="font-heading text-3xl text-primary mb-4">
+              精選幸運物
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              為您精心挑選的神秘商品，每一件都蘊含著獨特的能量
+            </p>
+          </div>
+          
+          <Suspense fallback={
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {[1, 2].map((i) => (
+                <Card key={i} className="animate-pulse bg-card/30">
+                  <div className="h-64 bg-muted/20 rounded-t-lg"></div>
+                  <CardContent className="p-6">
+                    <div className="h-4 bg-muted/20 rounded mb-2"></div>
+                    <div className="h-6 bg-muted/20 rounded"></div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          }>
+            <ProductGrid />
+          </Suspense>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="mt-32 border-t border-border bg-card/30 backdrop-blur-sm">
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                  <span className="text-primary-foreground font-bold text-sm">星</span>
+                </div>
+                <span className="font-heading text-xl text-primary">星語集</span>
+              </div>
+              <p className="text-muted-foreground text-sm">
+                神秘占卜與幸運物的專業電商平台
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold text-primary mb-4">服務項目</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link href="/products" className="hover:text-primary transition-colors">商品商城</Link></li>
+                <li><Link href="/divination" className="hover:text-primary transition-colors">線上占卜</Link></li>
+                <li><Link href="/articles" className="hover:text-primary transition-colors">靈性專欄</Link></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold text-primary mb-4">客戶服務</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link href="/about" className="hover:text-primary transition-colors">關於我們</Link></li>
+                <li>常見問題</li>
+                <li>服務條款</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold text-primary mb-4">聯絡我們</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>Email客服</li>
+                <li>LINE客服</li>
+                <li>社群媒體</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
+            <p>&copy; 2024 星語集. 版權所有</p>
+          </div>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
