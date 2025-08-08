@@ -63,6 +63,7 @@ export function ReadingResult({ reading }: ReadingResultProps) {
               isRevealed={true}
               isReversed={cardReading.isReversed}
               position={cardReading.position}
+              showDetailButton={true}
             />
           ))}
         </div>
