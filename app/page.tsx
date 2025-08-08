@@ -1,8 +1,9 @@
 import { Suspense } from 'react'
 import { Navigation } from '@/components/navigation'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
+import { EnhancedButton } from '@/components/ui/enhanced-button'
+import { Card, CardContent } from '@/components/ui/enhanced-card'
 import { Badge } from '@/components/ui/badge'
+import { StarfieldBackground } from '@/components/ui/starfield-background'
 import { Sparkles, Star, Moon, Heart } from 'lucide-react'
 import Link from 'next/link'
 import { ProductGrid } from '@/components/product-grid'
@@ -14,7 +15,8 @@ export const metadata = {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen particle-bg">
+    <div className="min-h-screen relative">
+      <StarfieldBackground particleCount={150} />
       <Navigation />
       
       {/* Hero Section */}
@@ -36,19 +38,19 @@ export default function HomePage() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button asChild size="lg" className="breathing-glow">
+              <EnhancedButton asChild size="lg" variant="mystic" className="particle-burst">
                 <Link href="/divination">
                   <Moon className="w-5 h-5 mr-2" />
                   立即占卜
                 </Link>
-              </Button>
+              </EnhancedButton>
               
-              <Button variant="outline" size="lg" className="hover-lift">
+              <EnhancedButton variant="outline" size="lg" className="hover-lift golden-border">
                 <Link href="/products">
                   <Star className="w-5 h-5 mr-2" />
                   探索商品
                 </Link>
-              </Button>
+              </EnhancedButton>
             </div>
           </div>
         </div>
@@ -62,7 +64,7 @@ export default function HomePage() {
           </h2>
           
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <Card className="hover-lift bg-card/50 border-border backdrop-blur-sm">
+            <Card variant="floating" interactive className="hover-lift">
               <CardContent className="p-6 text-center">
                 <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
                   <Star className="w-6 h-6 text-primary-foreground" />
@@ -72,7 +74,7 @@ export default function HomePage() {
               </CardContent>
             </Card>
             
-            <Card className="hover-lift bg-card/50 border-border backdrop-blur-sm">
+            <Card variant="floating" interactive className="hover-lift">
               <CardContent className="p-6 text-center">
                 <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-secondary to-accent flex items-center justify-center">
                   <Moon className="w-6 h-6 text-secondary-foreground" />
@@ -82,7 +84,7 @@ export default function HomePage() {
               </CardContent>
             </Card>
             
-            <Card className="hover-lift bg-card/50 border-border backdrop-blur-sm">
+            <Card variant="floating" interactive className="hover-lift">
               <CardContent className="p-6 text-center">
                 <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center">
                   <Heart className="w-6 h-6 text-accent-foreground" />
