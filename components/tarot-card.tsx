@@ -3,10 +3,9 @@
 import { useState } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { Star, Moon, Sparkles, Info } from 'lucide-react'
+import { Star, Moon, Sparkles } from 'lucide-react'
 import type { TarotCard as TarotCardType } from '@/lib/tarot'
 
 interface TarotCardProps {
@@ -40,16 +39,10 @@ export function TarotCard({
     }
   }
 
-  const CardDetailDialog = ({ card, isReversed }: { card: TarotCardType; isReversed: boolean }) => (
+  const CardDetailDialog = ({ card, isReversed, children }: { card: TarotCardType; isReversed: boolean; children: React.ReactNode }) => (
     <Dialog>
       <DialogTrigger asChild>
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          className="absolute top-2 right-2 opacity-0 group/card-hover:opacity-100 transition-all duration-300 z-10 bg-background/80 backdrop-blur-sm hover:bg-primary/20 hover:scale-110 shadow-lg"
-        >
-          <Info className="w-4 h-4" />
-        </Button>
+        {children}
       </DialogTrigger>
       <DialogContent className="max-w-2xl max-h-[80vh]">
         <DialogHeader>
@@ -171,13 +164,76 @@ export function TarotCard({
         </div>
 
         <div className="card-face card-front">
-          <Card className="w-full h-full bg-card/90 border-border backdrop-blur-sm group/card relative hover:shadow-2xl hover:shadow-primary/20 hover:scale-[1.02] hover:border-primary/30 transition-all duration-300 ease-out group/card-hover">
-            {/* 詳細資訊按鈕 */}
-            {card && isRevealed && showDetailButton && (
-              <CardDetailDialog card={card} isReversed={isReversed} />
-            )}
-            
-            <CardContent className="p-4 md:p-6 h-full flex flex-col">
+          {card && isRevealed && showDetailButton ? (
+            <CardDetailDialog card={card} isReversed={isReversed}>
+              <Card className="w-full h-full bg-card/90 border-border backdrop-blur-sm group/card relative hover:shadow-2xl hover:shadow-primary/20 hover:scale-[1.02] hover:border-primary/30 transition-all duration-300 ease-out cursor-pointer">
+                <CardContent className="p-4 md:p-6 h-full flex flex-col">
+                  {card && (
+                    <>
+                      <div className="text-center mb-3 md:mb-4">
+                        <div className={`w-12 h-12 md:w-16 md:h-16 mx-auto mb-2 md:mb-3 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg hover:shadow-primary/30 transition-shadow duration-300 ${isReversed ? 'rotate-180' : ''}`}>
+                          <Star className="w-6 h-6 md:w-8 md:h-8 text-primary-foreground" />
+                        </div>
+                        <h3 className="font-heading text-lg md:text-xl text-primary line-clamp-1">
+                          {card.name}
+                        </h3>
+                        <p className="text-xs md:text-sm text-muted-foreground line-clamp-1">
+                          {card.nameEn}
+                        </p>
+                        {isReversed && (
+                          <Badge variant="destructive" className="mt-1 md:mt-2 text-xs">
+                            逆位
+                          </Badge>
+                        )}
+                      </div>
+
+                      <div className="flex-1 space-y-2 md:space-y-3 min-h-0">
+                        <div className="flex-1">
+                          <h4 className="text-xs md:text-sm font-semibold text-primary mb-1">牌義</h4>
+                          <div className="text-xs md:text-sm text-muted-foreground leading-relaxed overflow-hidden">
+                            <p className="line-clamp-3 md:line-clamp-4">
+                              {isReversed ? card.meaning.reversed : card.meaning.upright}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div>
+                          <h4 className="text-xs md:text-sm font-semibold text-primary mb-1">關鍵字</h4>
+                          <div className="flex flex-wrap gap-1">
+                            {(isReversed ? card.keywords.reversed : card.keywords.upright)
+                              .slice(0, 3)
+                              .map((keyword, index) => (
+                                <Badge 
+                                  key={index} 
+                                  variant="outline" 
+                                  className="text-xs border-secondary/30"
+                                >
+                                  {keyword}
+                                </Badge>
+                              ))
+                            }
+                            {(isReversed ? card.keywords.reversed : card.keywords.upright).length > 3 && (
+                              <Badge variant="secondary" className="text-xs text-primary/70">
+                                +{(isReversed ? card.keywords.reversed : card.keywords.upright).length - 3}
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="pt-1 md:pt-2 border-t border-border">
+                          <p className="text-xs text-muted-foreground">
+                            {card.element} 元素
+                          </p>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </CardContent>
+              </Card>
+            </CardDetailDialog>
+          ) : (
+            <Card className="w-full h-full bg-card/90 border-border backdrop-blur-sm group/card relative hover:shadow-2xl hover:shadow-primary/20 hover:scale-[1.02] hover:border-primary/30 transition-all duration-300 ease-out">
+              <CardContent className="p-4 md:p-6 h-full flex flex-col">
               {card && (
                 <>
                   <div className="text-center mb-3 md:mb-4">
@@ -238,8 +294,9 @@ export function TarotCard({
                   </div>
                 </>
               )}
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </div>
 
