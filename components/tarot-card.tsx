@@ -187,45 +187,6 @@ export function TarotCard({
                         )}
                       </div>
 
-                      <div className="flex-1 space-y-2 md:space-y-3 min-h-0">
-                        <div className="flex-1">
-                          <h4 className="text-xs md:text-sm font-semibold text-primary mb-1">牌義</h4>
-                          <div className="text-xs md:text-sm text-muted-foreground leading-relaxed overflow-hidden">
-                            <p className="line-clamp-3 md:line-clamp-4">
-                              {isReversed ? card.meaning.reversed : card.meaning.upright}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div>
-                          <h4 className="text-xs md:text-sm font-semibold text-primary mb-1">關鍵字</h4>
-                          <div className="flex flex-wrap gap-1">
-                            {(isReversed ? card.keywords.reversed : card.keywords.upright)
-                              .slice(0, 3)
-                              .map((keyword, index) => (
-                                <Badge 
-                                  key={index} 
-                                  variant="outline" 
-                                  className="text-xs border-secondary/30"
-                                >
-                                  {keyword}
-                                </Badge>
-                              ))
-                            }
-                            {(isReversed ? card.keywords.reversed : card.keywords.upright).length > 3 && (
-                              <Badge variant="secondary" className="text-xs text-primary/70">
-                                +{(isReversed ? card.keywords.reversed : card.keywords.upright).length - 3}
-                              </Badge>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="pt-1 md:pt-2 border-t border-border">
-                          <p className="text-xs text-muted-foreground">
-                            {card.element} 元素
-                          </p>
-                        </div>
-                      </div>
                     </>
                   )}
                 </CardContent>
@@ -253,45 +214,6 @@ export function TarotCard({
                     )}
                   </div>
 
-                  <div className="flex-1 space-y-2 md:space-y-3 min-h-0">
-                    <div className="flex-1">
-                      <h4 className="text-xs md:text-sm font-semibold text-primary mb-1">牌義</h4>
-                      <div className="text-xs md:text-sm text-muted-foreground leading-relaxed overflow-hidden">
-                        <p className="line-clamp-3 md:line-clamp-4">
-                          {isReversed ? card.meaning.reversed : card.meaning.upright}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-xs md:text-sm font-semibold text-primary mb-1">關鍵字</h4>
-                      <div className="flex flex-wrap gap-1">
-                        {(isReversed ? card.keywords.reversed : card.keywords.upright)
-                          .slice(0, 3)
-                          .map((keyword, index) => (
-                            <Badge 
-                              key={index} 
-                              variant="outline" 
-                              className="text-xs border-secondary/30"
-                            >
-                              {keyword}
-                            </Badge>
-                          ))
-                        }
-                        {(isReversed ? card.keywords.reversed : card.keywords.upright).length > 3 && (
-                          <Badge variant="secondary" className="text-xs text-primary/70">
-                            +{(isReversed ? card.keywords.reversed : card.keywords.upright).length - 3}
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="pt-1 md:pt-2 border-t border-border">
-                      <p className="text-xs text-muted-foreground">
-                        {card.element} 元素
-                      </p>
-                    </div>
-                  </div>
                 </>
               )}
               </CardContent>
