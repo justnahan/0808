@@ -39,9 +39,11 @@ export default function DivinationPage() {
                 <p className="text-muted-foreground mb-6 leading-relaxed">
                   透過古老的塔羅牌，解讀當下的心境與未來的可能性。每張牌都承載著宇宙的智慧。
                 </p>
-                <Button className="w-full breathing-glow">
-                  <Moon className="w-4 h-4 mr-2" />
-                  開始塔羅占卜
+                <Button asChild className="w-full breathing-glow">
+                  <a href="/divination/tarot">
+                    <Moon className="w-4 h-4 mr-2" />
+                    開始塔羅占卜
+                  </a>
                 </Button>
               </CardContent>
             </Card>
@@ -55,9 +57,11 @@ export default function DivinationPage() {
                 <p className="text-muted-foreground mb-6 leading-relaxed">
                   根據您的出生時間與地點，深度解讀您的星座密碼與天賦潛能。
                 </p>
-                <Button variant="outline" className="w-full hover-lift border-secondary/30">
-                  <Star className="w-4 h-4 mr-2" />
-                  生成星盤
+                <Button asChild variant="outline" className="w-full hover-lift border-secondary/30">
+                  <a href="/divination/fortune">
+                    <Star className="w-4 h-4 mr-2" />
+                    個人化運勢
+                  </a>
                 </Button>
               </CardContent>
             </Card>
@@ -71,9 +75,11 @@ export default function DivinationPage() {
                 <p className="text-muted-foreground mb-6 leading-relaxed">
                   結合現代科技與古老智慧，為您智能匹配最適合的幸運物與開運建議。
                 </p>
-                <Button variant="outline" className="w-full hover-lift border-accent/30">
-                  <Sparkles className="w-4 h-4 mr-2" />
-                  AI占卜推薦
+                <Button asChild variant="outline" className="w-full hover-lift border-accent/30">
+                  <a href="/divination/history">
+                    <Sparkles className="w-4 h-4 mr-2" />
+                    占卜歷史
+                  </a>
                 </Button>
               </CardContent>
             </Card>
@@ -81,13 +87,13 @@ export default function DivinationPage() {
 
           <div className="text-center mt-16">
             <div className="inline-block p-8 bg-card/50 rounded-lg border border-border backdrop-blur-sm">
-              <Sparkles className="w-12 h-12 mx-auto mb-4 text-primary" />
+              <Sparkles className="w-12 h-12 mx-auto mb-4 text-primary animate-pulse" />
               <h3 className="font-heading text-xl text-primary mb-2">
-                占卜功能開發中
+                ✨ 占卜功能已全面上線！
               </h3>
               <p className="text-muted-foreground">
-                我們正在為您準備最神秘、最準確的占卜體驗<br />
-                敬請期待完整的占卜功能上線
+                體驗完整的塔羅占卜、個人化運勢服務<br />
+                讓神秘的力量指引您的人生之路
               </p>
             </div>
           </div>
