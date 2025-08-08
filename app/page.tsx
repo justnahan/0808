@@ -64,35 +64,41 @@ export default function HomePage() {
           </h2>
           
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <Card variant="floating" interactive className="hover-lift">
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                  <Star className="w-6 h-6 text-primary-foreground" />
-                </div>
-                <h3 className="font-accent text-lg mb-2 text-primary">塔羅占卜</h3>
-                <p className="text-muted-foreground text-sm">探索當下的心境與未來的可能</p>
-              </CardContent>
-            </Card>
+            <Link href="/divination/tarot">
+              <Card variant="floating" interactive className="hover-lift cursor-pointer transition-all duration-300 hover:scale-105">
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                    <Star className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <h3 className="font-accent text-lg mb-2 text-primary">塔羅占卜</h3>
+                  <p className="text-muted-foreground text-sm">探索當下的心境與未來的可能</p>
+                </CardContent>
+              </Card>
+            </Link>
             
-            <Card variant="floating" interactive className="hover-lift">
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-secondary to-accent flex items-center justify-center">
-                  <Moon className="w-6 h-6 text-secondary-foreground" />
-                </div>
-                <h3 className="font-accent text-lg mb-2 text-primary">星盤解析</h3>
-                <p className="text-muted-foreground text-sm">深度解讀您的星座密碼與天賦</p>
-              </CardContent>
-            </Card>
+            <Link href="/divination/fortune">
+              <Card variant="floating" interactive className="hover-lift cursor-pointer transition-all duration-300 hover:scale-105">
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-secondary to-accent flex items-center justify-center">
+                    <Moon className="w-6 h-6 text-secondary-foreground" />
+                  </div>
+                  <h3 className="font-accent text-lg mb-2 text-primary">星盤解析</h3>
+                  <p className="text-muted-foreground text-sm">深度解讀您的星座密碼與天賦</p>
+                </CardContent>
+              </Card>
+            </Link>
             
-            <Card variant="floating" interactive className="hover-lift">
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center">
-                  <Heart className="w-6 h-6 text-accent-foreground" />
-                </div>
-                <h3 className="font-accent text-lg mb-2 text-primary">AI推薦</h3>
-                <p className="text-muted-foreground text-sm">智能匹配最適合您的幸運物</p>
-              </CardContent>
-            </Card>
+            <Link href="/divination/history">
+              <Card variant="floating" interactive className="hover-lift cursor-pointer transition-all duration-300 hover:scale-105">
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center">
+                    <Heart className="w-6 h-6 text-accent-foreground" />
+                  </div>
+                  <h3 className="font-accent text-lg mb-2 text-primary">AI推薦</h3>
+                  <p className="text-muted-foreground text-sm">智能匹配最適合您的幸運物</p>
+                </CardContent>
+              </Card>
+            </Link>
           </div>
         </div>
       </section>
